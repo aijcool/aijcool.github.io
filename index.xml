@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://aijcool.github.io/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <image>
+      <title>My New Hugo Site</title>
+      <url>https://aijcool.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://aijcool.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.126.1</generator>
+    <language>en-us</language>
+    <atom:link href="https://aijcool.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://aijcool.github.io/posts/2024/pretraining_llms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://aijcool.github.io/posts/2024/pretraining_llms/</guid>
+      <description>大语言模型的数据处理、预训练、微调、评测与部署 大语言模型的本质是通过对其训练数据的有损压缩生成一个神经网络模型，比如常见的 GPT 是 decoder only transformer 架构，其工作方式是根据输入不断预测下一个最可能的 token 输出
+其训练过程基本包含三大步
+预训练，使用大量的数据，消耗大量的算力构建 base model（预训练后对于公开权重的模型可进行继续预训练以补充知识） 微调，使用少量的数据（prompt, completion 对）规范其输出以适应具体任务（比如问答，对话），并不能让模型掌握新知识 RLHF(基于人类反馈的强化学习，仍属于微调范畴，不过不同于传统监督式微调),用于改善其输入和人类价值观对齐 Pretraining LLMs 预训练的具体步骤 准备数据 数据采集 预训练的数据集格式需要是一列 text 数据 #从hugging face加载数据集，如果有其他格式的数据要先load_dataset转换成hugging face Dataset对象，然后再用concatenate_datasets合并 import datasets pretraining_dataset = datasets.load_dataset( &amp;#34;upstage/Pretraining_Dataset&amp;#34;, split=&amp;#34;train&amp;#34; ) 数据处理 数据对比 高质量的数据要做到无重复、无错误、一致、无不实内容以及安全无害。 清洗的基本步骤（详细见代码）
+删除过短的数据 文档内去重 文档间去重 语言筛选（去掉不一致的数据） 去除 PII 数据，有害，有幻觉，有偏见，拼写错的数据 其他处理规则 梳理好之后将数据存储 Parguet 格式（是一种列式存储格式，特别适合用于大数据处理和分析）
+file_path = &amp;#34;./data/preprocessed_dataset.parquet&amp;#34; dataset.to_parquet(file_path) Tokenizing Tokenizing 是将文本数据分割成更小的单元（tokens）的过程。这些单元可以是单词、子词、字符或其他语义单位。常见的 tokenization 方法有：
+单词级别的 tokenization：将句子分割成单个单词。 子词级别的 tokenization：如 BERT 和 GPT 使用的 WordPiece 或 Byte Pair Encoding（BPE）方法，将句子分割成子词。 字符级别的 tokenization：将句子分割成单个字符。 目的：</description>
+    </item>
+  </channel>
+</rss>
